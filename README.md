@@ -2,14 +2,15 @@
 
 crt.sh command line tool built with vlang
 
+## Download
+[Windows](https://github.com/Galaxy-sc/crtsh/releases/download/v0.1.1/crtsh.exe)
+
+[Linux](https://github.com/Galaxy-sc/crtsh/releases/download/v0.1.1/crtsh)
+
 ## Usage
 ```bash
 v run crtsh.v -u site.com
 ```
-
-[Windows](https://github.com/Galaxy-sc/crtsh/releases/download/v0.1.1/crtsh.exe)
-
-[Linux](https://github.com/Galaxy-sc/crtsh/releases/download/v0.1.1/crtsh)
 
 ### Linux
 ```bash
