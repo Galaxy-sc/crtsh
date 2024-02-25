@@ -1,7 +1,7 @@
 import net.http
-import net.html
 import os
 import flag
+import regex
 
 fn main() {
 	mut fp := flag.new_flag_parser(os.args)
@@ -20,32 +20,19 @@ fn main() {
 		return
 	}
 
-	mut sub := []string {}
-
 	response := http.get('https://crt.sh/?q=$url') or {panic(err)}
-    doc := html.parse(response.body)
-    tag := doc.get_tags(name: 'td')
-	tag1 := doc.get_tags(name: 'br')
-	
-	for i in tag { // Extracts all the contents of the " td " tag
-		if i.content.contains(url) {
-			sub << i.content
-		}
-	}
 
-	for i in tag1 { // Extracts all the contents of the " br " tag
-		if i.content.contains(url) {
-			sub << i.content
-		}
-	}
+	// Regex
+	reg := r'[a-zA-Z0-9\-.]+\.' + url
+	mut re := regex.regex_opt(reg) or {panic(err)}
+	final := re.find_all_str(response.str())
 
+	// Removes duplicates
 	mut all_list := []string {}
-
-    for word in sub { // Removes duplicates
+    for word in final { 
     	if all_list.any(it == word.str()) == false {
 			all_list << word
 			println(word)
    		}
 	}
-
 }
